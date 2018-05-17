@@ -33,6 +33,14 @@ class DealController {
         this._cleanForm();
     }
 
+    removeAll() {
+        this._dealList.cleanup();
+        this._dealView.update(this._dealList);
+
+        this._message.text = "All right. No more deals!"
+        this._messageView.update(this._message);
+    }
+
     //o _ é pra deixar claro que esse método só deve ser chamado por esta classe
     _createDeal() {
         return new Deal(

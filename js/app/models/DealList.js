@@ -13,4 +13,8 @@ class DealList {
         //com outros métodos (ex: push) é possível adicionar itens, mas numa copia e ñ na original
         return [].concat(this._deals);
     }
+
+    cleanup() {
+        this._deals = [];
+    }
 }
