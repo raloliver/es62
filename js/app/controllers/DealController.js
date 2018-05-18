@@ -5,7 +5,11 @@ class DealController {
         this._date = $('#data');
         this._quantity = $('#quantidade');
         this._valuation = $('#valor');
-        this._dealList = new DealList();
+        //usando arrow functions também funciona (com isso não é necessário usar o Reflect?)
+        this._dealList = new DealList(this, function (model) {
+            //atualizar a view ao alterar a model            
+            this._dealView.update(model);
+        });
 
         this._dealView = new DealView($('#deal-view'));
         //além de adicionar a tabela na view é preciso preencher ela com os valores e isso deve ser feito também ao adicionar novas deals
@@ -25,7 +29,7 @@ class DealController {
 
         //init
         this._dealList.add(this._createDeal()); //esse deve ser o único jeito de adicionar uma nova negociação
-        this._dealView.update(this._dealList);        
+        //this._dealView.update(this._dealList); //não é mais necessário, já que passamos o update para o construtor
 
         this._message.text = 'Success! Deal maked.' //logo após criar uma negociação a mensagem deve ser exibida
         this._messageView.update(this._message);
@@ -35,7 +39,7 @@ class DealController {
 
     removeAll() {
         this._dealList.cleanup();
-        this._dealView.update(this._dealList);
+        //this._dealView.update(this._dealList);
 
         this._message.text = "All right. No more deals!"
         this._messageView.update(this._message);
