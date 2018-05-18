@@ -5,11 +5,12 @@ class DealController {
         this._date = $('#data');
         this._quantity = $('#quantidade');
         this._valuation = $('#valor');
-        //usando arrow functions também funciona (com isso não é necessário usar o Reflect?)
-        this._dealList = new DealList(this, function (model) {
+        //usando arrow functions também funciona (com isso não é necessário usar o Reflect)
+        this._dealList = new DealList(model => 
             //atualizar a view ao alterar a model            
-            this._dealView.update(model);
-        });
+            this._dealView.update(model)
+        );
+        //uma AF é muito mais que uma maneira menos verbosa de escrever funções... o this de uma function pode variar conforme o contexto e numa AF ele é léxico, mantem o this do momento da sua criação até o final.
 
         this._dealView = new DealView($('#deal-view'));
         //além de adicionar a tabela na view é preciso preencher ela com os valores e isso deve ser feito também ao adicionar novas deals

@@ -3,13 +3,13 @@ class DealList {
     constructor(scope, trigger) {
         this._deals = [];
         this._trigger = trigger;
-        this._scope = scope;
+        //this._scope = scope;
     }
 
     add(deal) {
         this._deals.push(deal);
-        //this._trigger(this);
-        Reflect.apply(this._trigger, this._scope, [this]);
+        this._trigger(this);
+        //Reflect.apply(this._trigger, this._scope, [this]);
     }
 
     get deals() {
@@ -20,7 +20,7 @@ class DealList {
 
     cleanup() {
         this._deals = [];
-        //this._trigger(this);      
-        Reflect.apply(this._trigger, this._scope, [this]);  
+        this._trigger(this);      
+        //Reflect.apply(this._trigger, this._scope, [this]);  
     }
 }
